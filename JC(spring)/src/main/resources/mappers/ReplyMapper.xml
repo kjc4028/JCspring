@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.jc.mapper.ReplyMapper">
+
+<select id = "replyList" resultType="ReplyDto">
+select * from reply where bno = #{bno} order by rno desc
+</select>
+
+<insert id="replyInsert">
+insert into reply(rno,bno,replytext,replyer) values(reply_num.nextval,#{bno},#{replytext},#{replyer})
+</insert>
+
+<select id ="reListPage" resultType="ReplyDto">
+<![CDATA[
+select reply.* from (select rownum as rnum, reply.* from(select * from reply where bno = #{bno} order by rno desc)reply)reply where rnum >=#{reStart} and rnum <= #{reEnd}
+]]>
+</select>
+
+<select id="reTotalCnt" resultType="int">
+select count(bno) from reply where bno = #{bno}
+</select>
+
+<delete id="reDelete">
+delete from reply where rno = #{rno}
+</delete>
+</mapper>

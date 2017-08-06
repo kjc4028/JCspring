@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.jc.mapper.BoardMapper">
+
+<select id="boardAllList" resultType = "BoardDto">
+<!-- select * from board order by num desc -->
+<![CDATA[
+select board.* from (select rownum as rnum, board.* from(select * from board order by re_level desc, re_renum asc)board)board where rnum >= #{bbsStart} and rnum <=  #{bbsEnd}
+
+]]>
+</select>
+
+<select id ="nextnum" resultType="int">
+select max(num)+1 from board
+</select>
+
+<select id="bbsContent" resultType = "BoardDto">
+select * from board where num = #{num}
+</select>
+
+<insert id="bbsInsert" >
+insert into board(num,writer,email,subject,passwd,reg_date,readcount,content,ip,re_step,re_level,re_renum) 
+values(board_num.nextval,#{writer, jdbcType=VARCHAR},#{email, jdbcType=VARCHAR},#{subject, jdbcType=VARCHAR},#{passwd, jdbcType=VARCHAR},sysdate,0,#{content, jdbcType=VARCHAR},0,#{re_step},#{re_level},#{re_renum})
+
+</insert>
+
+<select id="totalBBS" resultType = "int" >
+select count(*) from board
+</select>
+
+<delete id="deleteBBS">
+delete from board where num = #{num}
+</delete>
+
+<update id="updateBBS">
+update board set subject = #{subject}, content=#{content},email=#{email} where num = #{num}
+
+</update>
+
+<update id="readcnt">
+update board set readcount= readcount+1 where num= #{num}
+</update>
+
+<update id="replyshare">
+update board set re_renum = re_renum+1 where re_level = #{re_level} and re_renum > #{re_renum}
+</update>
+
+<select id="searchBBS" resultType = "BoardDto">
+<![CDATA[
+select board.* from (select rownum as rnum, board.* from(select * from board order by re_level desc, re_renum asc)board)board where subject like #{word} order by rnum asc
+]]>
+</select>
+
+
+
+</mapper>

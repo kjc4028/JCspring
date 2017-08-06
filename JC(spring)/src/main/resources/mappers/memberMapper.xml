@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.jc.mapper.MemberMapper">
+
+<select id="listAll" resultType="MemberDto">
+select * from member where userid not in(select userid from member where userid = 'admin')
+</select>
+
+
+<insert id = "insert">
+insert into member values(#{userName},#{userID},#{userPW},#{userEmail},#{userGender},#{addr})
+</insert>
+
+<select id="idCheck" resultType="int">
+select count(*) from member where userid = #{id}
+</select>
+
+<select id="idSelect" resultType = "String">
+select userid from member where userid = #{id}
+</select>
+
+<select id="SearchID" resultType = "MemberDto" parameterType="java.util.HashMap" >
+select userID from member where username=#{name} and userEmail=#{Email}
+</select>
+
+<select id="SearchPW" resultType = "MemberDto" parameterType="java.util.HashMap" >
+select userpw from member where username=#{name} and userEmail=#{Email} and userID = #{id}
+</select>
+
+<select id="delete" >
+delete from member where userid = #{id}
+</select>
+
+
+</mapper>
