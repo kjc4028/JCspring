@@ -92,5 +92,11 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(namespace+".searchBBS",word);
 	}
 
+	@Override
+	public List<String> bbsTest() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".BBSTest");
+	}
+
 	
 }

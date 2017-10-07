@@ -82,7 +82,11 @@ table {
 						<input type="password" class="form-control" placeholder="비밀번호"
 							name="password" maxlength="20">
 					</div>
-
+					
+					<div>
+					로그인 유지하기<input type="checkbox" name="loginSave">
+					</div>
+					
 					<div>
 						<input type="button" class="btn btn-primary form-control"
 							value="로그인" onclick="loginConfirm()">

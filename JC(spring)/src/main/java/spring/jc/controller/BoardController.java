@@ -1,16 +1,26 @@
 package spring.jc.controller;
 
 
+import java.io.File;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import spring.jc.dto.BoardDto;
 import spring.jc.service.BoardService;
@@ -23,6 +33,9 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	@RequestMapping("/bbsAllList")
 	public String listAll(@RequestParam("page") int page, @RequestParam("perPageNum")int perPageNum,Model model){
@@ -219,7 +232,60 @@ public class BoardController {
 		return "board/searchListForm";
 	}
 	
+	@RequestMapping(value ="/upload", method=RequestMethod.POST)
+	public String uploadForm(MultipartFile file,Model model){
+		try {
+		
+		 String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+		 
+		 model.addAttribute(savedName);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return "home";
+	}
+	
+	private String uploadFile(String originalName, byte[] fileData) throws Exception{
+		UUID uid = UUID.randomUUID();
+		
+		String savedName = uid.toString() + "_" + originalName;
+		
+		File target = new File(uploadPath,savedName);
+		
+		FileCopyUtils.copy(fileData,target);
+		
+		return savedName;
+	}
+	
+	@RequestMapping(value ="/fileForm")
+	public String fileForm(){
+		
+	
+		
+		return "board/fileupload";
+	}
+	
+	@RequestMapping("/jong")
+	public  String jongMe(Model model) throws Exception {
+		
+		List<String> list = new ArrayList<>();
+		list.addAll(service.bbsTest());
+		
+		model.addAttribute("aa",list);
+		model.addAttribute("aaa",service.bbsTest());
+		return "board/jongTest";
+		
+	}
+
+	@RequestMapping("/jong2")
+	public  @ResponseBody List<String> jongMeth(Model model) throws Exception {
+		
+		
+		return service.bbsTest();
+	}
 	
 	
 }

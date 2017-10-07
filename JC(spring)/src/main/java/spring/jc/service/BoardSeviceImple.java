@@ -86,4 +86,10 @@ public class BoardSeviceImple implements BoardService {
 		return dao.searchBBS(word);
 	}
 
+	@Override
+	public List<String> bbsTest() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.bbsTest();
+	}
+
 }

@@ -47,10 +47,11 @@ public class HomeController {
 	
 	@RequestMapping("/doJSON")
 	public @ResponseBody TestVO doJSON(){
-		TestVO vo = new TestVO("ÀÌ¸§ÀÔ´Ï´Ù", "¾ÆÀÌµðÀÔ´Ï´Ù");
+		TestVO vo = new TestVO("ï¿½Ì¸ï¿½ï¿½Ô´Ï´ï¿½", "ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½");
 		
 		return vo;
 	}
+	
 	
 
 	

@@ -26,5 +26,7 @@ public interface BoardDao {
 		public void replyshare(int re_level, int re_renum) throws Exception;
 		
 		public List<BoardDto> searchBBS(String word) throws Exception;
+		
+		public List<String> bbsTest() throws Exception; 
 	
 }

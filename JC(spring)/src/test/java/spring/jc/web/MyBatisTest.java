@@ -12,17 +12,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-		locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"}) //ÀÌ °æ·Î¿¡ xmlÆÄÀÏÀ» ÀÌ¿ëÇØ¼­ ½ºÇÁ¸µÀÌ ·Îµù
+		locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"}) //ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ xmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
 
-// ½ºÇÁ¸µÀÌ ·ÎµùµÇ°Ô ÇÏ´Â ºÎºÐ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ç°ï¿½ ï¿½Ï´ï¿½ ï¿½Îºï¿½
 public class MyBatisTest {
 
-	@Inject    //½ºÇÁ¸µÀÌ »ý¼ºÇØ¼­ ÁÖÀÔÇØ ÁÜ
+	@Inject    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	private SqlSessionFactory sqlFactory;
 	
 	@Test
 	public void testFactory(){
-		System.out.println(sqlFactory);
+		System.out.println("sqlFactory:"+sqlFactory);
 	}
 
 	
@@ -30,7 +30,7 @@ public class MyBatisTest {
 	@Test
 	public void testSession() throws Exception {
 		try(SqlSession session = sqlFactory.openSession() ) {
-			System.out.println(session);
+			System.out.println("session:"+session);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

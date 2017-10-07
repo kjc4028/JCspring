@@ -85,8 +85,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String login(String id, String password, HttpSession session){
+	public String login(String id, String password,Boolean loginSave, HttpSession session){
 		String view = "";
+		System.out.println(loginSave);
 		try {
 			String idr = service.idSelect(id);
 			
