@@ -54,13 +54,21 @@ $(document).ready(function(){
 		var q = $("#tb1").clone();
 		q.appendTo("#div4"); */
 		
-		var asd = "<tr><td><input type=text value=a></td><td><input type=text value=a></td><td><input type=text value=a></td><td><input type=button value=취소><input type=button value=저장></td></tr>"; 
+		var asd = "<tr><td><input type=text value=a></td><td><input type=text value=a></td><td><input type=text value=a></td><td><input id=cancel type=button value=취소><input id=save type=button value=저장></td></tr>"; 
 		 document.getElementById('q'+id1).innerHTML=asd;
 		
 	 	/* var gg = $("#tb3").css("display","block");  */
+			
+	
+		 $("#save").click(function(){
+			 	alert("save!!");
+			 });
+		
+		 $("#cancel").click(function(){
+			 	alert("cancel!!");
+			 });
 		
 	});
-	
 	
 	
 	$("#edit").click(function(){
@@ -82,12 +90,11 @@ $(document).ready(function(){
 			});
 	});
 	
+
 	
 	/* end script */
 });
 	
-	
-
 
 
 </script>

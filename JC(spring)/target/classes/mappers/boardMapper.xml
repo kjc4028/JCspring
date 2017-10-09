@@ -55,7 +55,9 @@ select board.* from (select rownum as rnum, board.* from(select * from board ord
 </select>
 
 <select id="BBSTest" resultType="hashmap">
-SELECT WRITER AS WRITER, NUM AS NUM FROM BOARD ORDER BY NUM DESC
+SELECT * 
+FROM BOARD 
+ORDER BY NUM DESC
 </select>
 
 

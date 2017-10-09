@@ -251,7 +251,7 @@ public class BoardController {
 	private String uploadFile(String originalName, byte[] fileData) throws Exception{
 		UUID uid = UUID.randomUUID();
 		
-		String savedName = uid.toString() + "_" + originalName;
+		String savedName = uid+"_"+originalName;
 		
 		File target = new File(uploadPath,savedName);
 		
@@ -259,6 +259,18 @@ public class BoardController {
 		
 		return savedName;
 	}
+	
+	/*private String uploadFile(String originalName, byte[] fileData) throws Exception{
+		UUID uid = UUID.randomUUID();
+		
+		String savedName = uid.toString() + "_" + originalName;
+		
+		File target = new File(uploadPath,savedName);
+		
+		FileCopyUtils.copy(fileData,target);
+		
+		return savedName;
+	}*/
 	
 	@RequestMapping(value ="/fileForm")
 	public String fileForm(){
