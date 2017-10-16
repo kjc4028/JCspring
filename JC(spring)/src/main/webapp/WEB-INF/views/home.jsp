@@ -30,7 +30,7 @@ $(document).ready(function(){
 		$("div.d1").find("p").css("background-color","red");
 		$("#div1").text($("form").serialize());	
 		var str = $("form").serialize();
-		$("#div3").text(str.split("&"));
+		$("#div3").text("serialize(): "+str.split("&"));
 		
 		var a1 = { one : "100",
 				   two : "200"		    
@@ -90,7 +90,29 @@ $(document).ready(function(){
 			});
 	});
 	
-
+	var md=0;
+	
+	$(".btn").click(function(e){
+		if(md == 0){
+			md=1;
+			var str = e.target.getAttribute('id');
+			$("#rs").append(str);
+			$("#rs1").append(md);
+			var ww = $("#cbtn2").clone();
+			$("#d11").append(ww);
+		}
+		
+	});
+	
+	$("#t1").on("click", ".cbtn", function(e){
+		if(md == 1){
+			md=0;
+			var str = e.target.getAttribute('id');
+			$("#rs").append(str);
+			$("#rs1").append(md);
+		}
+		
+	});
 	
 	/* end script */
 });
@@ -116,6 +138,19 @@ $(document).ready(function(){
 <h1>
  메인 페이지 입니다.
 </h1>
+<br>
+<table id="t1" border="1" style="margin-left: 100px">
+	<tr id="r1"> <td id="d1">1</td> <td id="d11"> <input type="button" value="버튼" id="btn1" class="btn"><!-- <input type="button" value="취소" id="cbtn1" class="cbtn"> --> </td></tr>
+	<tr id="r2"> <td id="d2">2</td> <td id="d22"> <input type="button" value="버튼" id="btn2" class="btn"><!-- <input type="button" value="취소" id="cbtn2" class="cbtn"> --> </td></tr>
+	<tr id="r3"> <td id="d3">3</td> <td id="d33"> <input type="button" value="버튼" id="btn3" class="btn"></td></tr>
+</table>
+<input type="button" value="취소" id="cbtn2" class="cbtn">
+<br>
+<div id="rs"></div>
+<div id="rs1"></div>
+<br>
+
+
 <form>
 <input type="text" name="a">
 <input type="text" name="b">
@@ -139,7 +174,7 @@ $(document).ready(function(){
 <div>
 태그 test 영역 <br>
 <c:set value="jcvalue" var="jcset"/>
-<c:import url="board/bbsList.jsp"></c:import>
+<%-- <c:import url="board/bbsList.jsp"></c:import> --%>
 <br>
 <c:forEach var="q" begin="1" end="10">
 <c:out value="${q}"></c:out>
